@@ -1,10 +1,14 @@
 # @covennetwork/mcp
 
-Stdio [MCP](https://modelcontextprotocol.io) server that exposes Coven's read tools on Arc, plus an optional write path that is gated by an on-chain session and limited to bounded swaps.
+An [MCP](https://modelcontextprotocol.io) server that lets AI agents swap tokens and bridge USDC on Arc through [Coven](https://coven.network).
 
-- Read tools work without any keys: quotes, token metadata, pool discovery, pool state, and CCTP bridge quotes.
-- Write tools appear only when a Coven session is configured. Every swap is simulated first, bound to a single-use handle, and checked on-chain against the session's caps.
-- Token symbols and names come from the chain, so anyone can set them. The server never accepts them as input and returns them sanitized under `untrusted_*` field names.
+Connect it to Claude, Cursor, or any other MCP client, and your agent can:
+
+- **Swap tokens on Arc.** It quotes, simulates, and executes swaps across Uniswap v3 and v4 pools.
+- **Bridge USDC.** It quotes CCTP transfers from Arc to other chains.
+- **Research before trading.** It looks up token metadata, impersonator flags, pool liquidity, and hook risk.
+
+Your funds stay protected. The agent trades through an on-chain Coven session that you create and control. The session sets the tokens it may trade, per-trade and daily spending caps, slippage and price impact limits, and an expiry. You can revoke it at any time. Without a session, the server runs read-only and needs no keys.
 
 ## Install
 
